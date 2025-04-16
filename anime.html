@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Anime | Anilax</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <header>
+    <h1 id="anime-title">Anime</h1>
+  </header>
+  <main id="episode-list"></main>
+  <video id="video-player" width="100%" controls></video>
+
+  <script src="js/animeData.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const title = params.get('title');
+    const anime = animeData.find(a => a.title === title);
+
+    document.getElementById('anime-title').textContent = anime?.title ?? 'Unknown';
+    const list = document.getElementById('episode-list');
+    const player = document.getElementById('video-player');
+
+    anime?.episodes.forEach((ep, i) => {
+      const btn = document.createElement('button');
+      btn.textContent = 'Episode ' + (i + 1);
+      btn.onclick = () => {
+        player.src = ep.video;
+        player.load();
+        player.play();
+      };
+      list.appendChild(btn);
+    });
+  </script>
+</body>
+</html>

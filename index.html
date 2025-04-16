@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Anilax - Watch Anime</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <header>
+    <h1>Anilax</h1>
+  </header>
+  <main id="anime-list"></main>
+
+  <script src="js/animeData.js"></script>
+  <script>
+    const list = document.getElementById('anime-list');
+    animeData.forEach(anime => {
+      const item = document.createElement('div');
+      item.className = 'anime-card';
+      item.innerHTML = \`
+        <a href="anime.html?title=\${encodeURIComponent(anime.title)}">
+          <img src="\${anime.thumbnail}" alt="\${anime.title}" />
+          <h2>\${anime.title}</h2>
+        </a>
+      \`;
+      list.appendChild(item);
+    });
+  </script>
+</body>
+</html>
